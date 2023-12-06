@@ -83,6 +83,34 @@ function saveFileAs() {
     alert('Compilando código...');
     //consumir api java para compilar
     
+    try {
+      const url = 'http://localhost:8080/compile';
+      const data = { code: codeEditor.value };
+      const otherParams = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        method: 'POST',
+      };
+      //cargarlo en console-output
+      fetch(url, otherParams)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          document.getElementById('console-output').innerHTML = data.output;
+          alert('Compilación exitosa');
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('Error al compilar');
+        });
+      
+    } catch (error) {
+      console.log(error);
+      alert('Error al compilar');
+      
+    }
 
 
     
