@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   const codeEditor = document.getElementById('code-editor');
   const lineNumbers = document.getElementById('line-numbers');
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fs = require('fs');
     fs.writeFileSync(defaultPath, contentToSave);
 
-    alert('Archivo guardado en ' + defaultPath);
+    // alert('Archivo guardado en ' + defaultPath);
 
   }
 
@@ -53,7 +54,7 @@ function saveFileAs() {
 
   fileInput.setAttribute('data-filepath', defaultPath);
   //pausa hasta que se guarde el archivo
-  setTimeout(function(){ alert("Archivo guardado."); }, 2000);
+  // setTimeout(function(){ alert("Archivo guardado."); }, 2000);
 }
 
 function loadFile() {
@@ -93,19 +94,25 @@ function loadFile() {
 
 
   function compileCode() {
+    document.getElementById('console-output').innerHTML = "";
     // Lógica de compilación aquí
-    console.log('Compilando código...');
-    alert('Compilando código...');
     //consumir api java para compilar
     
     try {
-      const url = 'http://localhost:8080/compile';
+      // recibe un json es tipo post y se debe mandar una lista bidimensional
+      // fileInput.getAttribute('data-filepath') lee el contenido y velo guardando en una lista bidimensiona cada linea es una nuva lista
+      const lines = codeEditor.value.split('\n');
+
+      // Convert each line into an array by splitting on commas
+      const twoDimensionalArray = lines.map(line => line.split(','));
+      
+      const url = 'http://localhost:8080/compiladorController/compilar';
       const data = { code: codeEditor.value };
       const otherParams = {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ codigo: twoDimensionalArray }), 
         method: 'POST',
       };
       //cargarlo en console-output
@@ -113,8 +120,14 @@ function loadFile() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          document.getElementById('console-output').innerHTML = data.output;
-          alert('Compilación exitosa');
+          if(data.length === 0){
+            document.getElementById('console-output').innerHTML = "Compilacion exitosa";  
+          }else{
+            for (let index = 0; index < data.length; index++) {
+              document.getElementById('console-output').innerHTML += data[index] +"<br>";
+              
+            }
+          }
         })
         .catch((err) => {
           console.log(err);
