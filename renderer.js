@@ -91,9 +91,36 @@ function loadFile() {
   reader.readAsText(file);
 }
 
+//Si es textarea con id code-editor, cuando le de al tab no pierda el focus si no meter una identacon
+    codeEditor.addEventListener('keydown', function(e) {
+
+      if (e.keyCode === 9) { // tab was pressed
+
+        // get caret position/selection
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        var target = e.target;
+        var value = target.value;
+
+        // set textarea value to: text before caret + tab + text after caret
+        target.value = value.substring(0, start)
+                        + "    " 
+                        + value.substring(end);
+
+        // put caret at right position again (add one for the tab)
+        this.selectionStart = this.selectionEnd = start + 1;
+
+        // prevent the focus lose
+        e.preventDefault();
+      }
+    }
+  );
 
 
   function compileCode() {
+
+    saveFile();
     document.getElementById('console-output').innerHTML = "";
     // Lógica de compilación aquí
     //consumir api java para compilar

@@ -1,1 +1,17 @@
-xd
+Inicio
+    Const Num miVariable
+    Leer miVariable
+    Escribir miVariable
+    Si a > c Entonces
+     Mientras b > d Entonces
+         a = a - 1
+         b = "a"
+         Si a > b Entonces
+             miVariable = a
+         Sino
+             Cadena miCadena
+             miCadena = "Hola"
+         FinSi
+     FinMientras
+    FinSi
+Fin
