@@ -1,0 +1,139 @@
+body {
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8f8;
+    height: 100vh;
+  }
+  
+  #toolbar {
+    background-color: #333;
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    /*Letra negra*/
+    color: black;
+
+  }
+  
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #app {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+  }
+  
+  #code-editor-container,
+  #console-container {
+    flex-grow: 1;
+    overflow: hidden;
+    resize: both;
+    display: flex;
+  }
+  
+  #code-editor-container {
+    border-right: 1px solid #ccc;
+    position: relative;
+  }
+  /* Puedes agregar estilos adicionales según tus necesidades */
+#toolbar button {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    filter: brightness(0.9);
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    color: black;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+   /*Fuente de consolas negritas*/
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
+
+    
+}
+
+#toolbar button:hover {
+    filter: brightness(1);
+    /* mas gradne */
+    transform: scale(1.1);
+}
+  
+#toolbar img {
+    width: 26px; /* Ajusta según el tamaño real de tus imágenes */
+    height: 26px;
+    padding-right: 5px;
+}
+  
+  
+  #line-numbers-container {
+    width: 30px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+  
+  #line-numbers {
+    /* Ajusta la altura y el tamaño de la fuente para que coincida con el editor de código */
+    padding-top: 10px;
+    min-height: 100%;
+    font-size: 18px; /* Ajusta según sea necesario */
+    line-height: 1.5;
+    color: #555; /* Ajusta el color según sea necesario */
+  }
+  
+  #code-editor {
+    width: calc(100% - 30px);
+    height: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    resize: none;
+    outline: none;
+    overflow-y: scroll;
+    /* Fuente para terminal jetbrain */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    line-height: 1.5;
+    text-decoration: none;
+    text-decoration-skip-ink: none;
+
+  }
+  
+  #console-output {
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    overflow-y: auto;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: both;
+  }
+  

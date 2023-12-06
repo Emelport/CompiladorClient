@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title>Compilador</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div id="toolbar">
+    <button id="openFileBtn"><img src="assets/carpeta.png" alt="Abrir" /></button>
+    <input type="file" id="file-input" accept=".txt" style="display: none;" />
+    <button id="saveFileBtn"><img src="assets/disquete.png" alt="Guardar" /></button>
+    <button id="saveFileAsBtn"><img src="assets/guardar.png" alt="Guardar como" /></button>
+    <button id="compileBtn"><img src="assets/compilar.png" alt="Compilar" />Compilar</button>
+  </div>
+  <div id="app">
+    <div id="code-editor-container">
+      <div id="line-numbers"></div>
+      <textarea id="code-editor" placeholder="Escribe tu código aquí..."></textarea>
+    </div>
+    <div id="console-container">
+      <div id="console-output" contenteditable="false"></div>
+    </div>
+  </div>
+  <script src="node_modules/file-saver/dist/FileSaver.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
