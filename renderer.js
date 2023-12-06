@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveFileAsBtn = document.getElementById('saveFileAsBtn');
   const fileInput = document.getElementById('file-input');
   const compileBtn = document.getElementById('compileBtn');
+  fileInput.addEventListener('change', loadFile);
 
   // Agregar números de línea
   codeEditor.addEventListener('input', updateLineNumbers);
@@ -55,27 +56,41 @@ function saveFileAs() {
   setTimeout(function(){ alert("Archivo guardado."); }, 2000);
 }
 
+function loadFile() {
+  //Borrar todos los datos temporales
+  
 
-  function loadFile() {
-    const file = fileInput.files[0];
+  codeEditor.value = '';
+  fileInput.setAttribute('data-filepath', '');
 
-    if (file) {
-      const reader = new FileReader();
+  const file = fileInput.files[0];
 
-      reader.onload = function (e) {
-        const content = e.target.result;
-        codeEditor.value = content;
-
-        // Actualizar los números de línea después de cargar el archivo
-        updateLineNumbers();
-
-        // Establecer la ruta del archivo actual
-        fileInput.setAttribute('data-filepath', file.path);
-      };
-
-      reader.readAsText(file);
-    }
+  if (!file) {
+    alert('No se ha seleccionado ningún archivo');
+    return;
   }
+
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    const content = e.target.result;
+
+    // Introduce a delay before updating the content
+    setTimeout(() => {
+      codeEditor.value = content;
+      // Actualizar los números de línea después de cargar el archivo
+      updateLineNumbers();
+      // Establecer la ruta del archivo actual
+      fileInput.setAttribute('data-filepath', file.path);
+      // Clear the file input value to ensure the change event triggers for subsequent selections
+      fileInput.value = '';
+    }, 100); // Adjust the delay as needed
+  };
+
+  reader.readAsText(file);
+}
+
+
 
   function compileCode() {
     // Lógica de compilación aquí
