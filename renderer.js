@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 
 document.addEventListener('DOMContentLoaded', () => {
   const codeEditor = document.getElementById('code-editor');
@@ -7,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveFileAsBtn = document.getElementById('saveFileAsBtn');
   const fileInput = document.getElementById('file-input');
   const compileBtn = document.getElementById('compileBtn');
+  const treeCompilador = document.getElementById('btnAbrir');
+
+    treeCompilador.addEventListener('click', () => {
+      ipcRenderer.send('open-new-window');
+
+    })
   fileInput.addEventListener('change', loadFile);
 
   // Agregar números de línea
