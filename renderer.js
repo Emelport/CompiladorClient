@@ -123,8 +123,7 @@ function loadFile() {
       }
     }
   );
-
-
+  
   function compileCode() {
 
     saveFile();

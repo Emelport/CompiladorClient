@@ -1,5 +1,18 @@
-Inicio 
- Si i>0 Entonces
-       
- FinSi                                 
+Inicio
+Num b
+Leer b
+Si b > 5 Entonces
+  Escribir "b es mayor a 5"
+Sino   
+Escribir "b no es mayor a 5"
+i = 10
+Mientras i > 0 Entonces
+ Cadena d
+ d = "hola"
+   Si d == "hola" Entonces
+    Escribir "d es igual a hola"            
+    FinSi
+ i = i - 1
+FinMientras
+FinSi
 Fin
